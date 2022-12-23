@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [luba, setLuba] = useState(0);
 
   return (
     <div className="App">
@@ -17,8 +18,13 @@ function App() {
       </div>
       <h1>Free by Florence and the machines is a good song</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button
+          onClick={() => {
+            setCount((count) => count + 1);
+            setLuba((luba) => luba + 2 * count);
+          }}
+        >
+          count is {count}={luba}
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
