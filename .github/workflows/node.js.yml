@@ -45,5 +45,5 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist-folder
-      - run: pm2 delete dummy-blug > /dev/null && pm2 serve --spa -p 8080 dist
+      - run: pm2 delete dummy-blug > /dev/null || true  && pm2 serve --spa --name dummy-blug -p 8080 .
 
