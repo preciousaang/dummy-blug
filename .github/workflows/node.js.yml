@@ -8,8 +8,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build_and_test:
+    name: Build and test application
     runs-on:  ubuntu-18.04
 
     strategy:
@@ -29,3 +29,19 @@ jobs:
     - run: npm run build --if-present
     - name: Run tests
       run: npm test
+    - name: Upload dist folder to the server
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist-folder
+    
+
+  deploy_app:
+    name: Deploy app on my self hosted server
+    runs-on: self-hosted
+    steps:
+      - name: Download dist folder
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-folder
+      - run: pm2 delete dummy-blug > /dev/null && pm2 serve --spa -p 8080 dist
+
