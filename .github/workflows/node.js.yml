@@ -37,6 +37,7 @@ jobs:
 
   deploy_app:
     name: Deploy app on my self hosted server
+    needs: build_and_test
     runs-on: self-hosted
     steps:
       - name: Download dist folder
